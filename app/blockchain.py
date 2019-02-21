@@ -4,6 +4,7 @@ import json
 import requests
 from flask import request
 from app import app
+from app.provenance import new_art
 
 
 class Block:
@@ -110,15 +111,10 @@ peers = set()
 @app.route('/newtransaction', methods=['POST'])
 def newtransaction():
     transaction_data = request.get_json()
-    requiredfields = ["id", "name", "size", "weight", "artist"]
-
-    for field in requiredfields:
-        if not transaction_data.get(field):
-            return "Invalid transaction data", 404
-
     transaction_data["timestamp"] = time.time()
-
     blockchain.addnewTransactions(transaction_data)
+    new_art()
+    print(get_pendingtransactions())
 
     return "Success", 201
 

@@ -1,9 +1,34 @@
-2019-02-03 21:24:13,476 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:43]
-2019-02-03 21:25:07,998 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:43]
-2019-02-07 18:30:03,709 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:43]
-2019-02-08 15:08:56,956 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:43]
-2019-02-08 18:05:05,059 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-08 18:05:07,777 ERROR: Exception on /login [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+2019-02-10 15:19:06,846 ERROR: Exception on /art_transaction [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1816, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1831, in finalize_request
+    response = self.make_response(rv)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1957, in make_response
+    'The view function did not return a valid response. The'
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+2019-02-10 15:19:33,819 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 15:20:21,899 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 15:45:17,742 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 15:48:53,334 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 15:49:12,541 ERROR: Exception on /mine [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1816, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1831, in finalize_request
+    response = self.make_response(rv)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1957, in make_response
+    'The view function did not return a valid response. The'
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+2019-02-10 15:53:55,711 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 15:58:29,826 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 16:08:05,086 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 16:23:08,794 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 16:23:10,211 ERROR: Exception on / [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -17,8 +42,10 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 56, in login
-    return render_template('login.html', title='Sign In', form=form)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 39, in index
+    return render_template('index.html', title='Home', node_address=CONNECTED_NODE_ADDRESS, form=form)
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 135, in render_template
     context, ctx.app)
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 117, in _render
@@ -31,7 +58,7 @@ Traceback (most recent call last):
     reraise(exc_type, exc_value, tb)
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 37, in reraise
     raise value.with_traceback(tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/login.html", line 2, in top-level template code
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/index.html", line 2, in top-level template code
     {% import 'bootstrap/wtf.html' as wtf %}
   File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/base.html", line 1, in top-level template code
     {% extends 'bootstrap/base.html' %}
@@ -43,8 +70,8 @@ Traceback (most recent call last):
     {% block body -%}
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 21, in block "body"
     {% block navbar %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/base.html", line 22, in block "navbar"
-    <li><a href="{{ url_for('explore') }}">Get Transactions</a></li>
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/base.html", line 28, in block "navbar"
+    <li><a href="{{ url_for('get_transactions') }}">Get Transactions</a></li>
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/helpers.py", line 356, in url_for
     return appctx.app.handle_url_build_error(error, endpoint, values)
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2061, in handle_url_build_error
@@ -55,9 +82,12 @@ Traceback (most recent call last):
     force_external=external)
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/werkzeug/routing.py", line 1776, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'explore'. Did you mean 'edit_profile' instead?
-2019-02-08 18:09:17,881 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-08 18:09:19,798 ERROR: Exception on /login [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+werkzeug.routing.BuildError: Could not build url for endpoint 'get_transactions'. Did you mean 'fetch_transactions' instead?
+2019-02-10 16:23:35,183 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 17:31:14,936 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 17:37:52,028 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 17:39:04,399 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 17:39:29,316 ERROR: Exception on /index [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -71,44 +101,12 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 57, in login
-    return render_template('login.html', title='Sign In', form=form)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 135, in render_template
-    context, ctx.app)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 117, in _render
-    rv = template.render(context)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/login.html", line 2, in top-level template code
-    {% import 'bootstrap/wtf.html' as wtf %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/base.html", line 1, in top-level template code
-    {% extends 'bootstrap/base.html' %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
-    {% block doc -%}
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
-    {%- block html %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
-    {% block body -%}
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block "body"
-    {% block content -%}
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/base.html", line 48, in block "content"
-    {% block app_content %}{% endblock %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/login.html", line 15, in block "app_content"
-    <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2061, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/helpers.py", line 345, in url_for
-    force_external=external)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/werkzeug/routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'reset_password_request'. Did you mean 'edit_profile' instead?
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 24, in index
+    fetch_transactions()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 125, in fetch_transactions
+    tx["hash"] = block["previous_hash"]
+KeyError: 'previous_hash'

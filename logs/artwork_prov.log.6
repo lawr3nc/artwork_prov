@@ -1,0 +1,106 @@
+2019-02-09 12:51:59,631 ERROR: Exception on /art_transaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 165, in art_transaction
+    headers={'Content-type': 'application/json'})
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 112, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 494, in request
+    prep = self.prepare_request(req)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 437, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/models.py", line 308, in prepare
+    self.prepare_body(data, files, json)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/models.py", line 458, in prepare_body
+    body = complexjson.dumps(json)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Decimal is not JSON serializable
+2019-02-09 12:54:45,313 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 12:57:56,833 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 13:22:14,998 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 13:50:26,493 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 13:51:24,396 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 13:54:05,461 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 13:59:37,908 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 14:00:02,434 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 14:02:23,450 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 14:24:57,108 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 23:17:03,045 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 23:21:42,277 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 23:22:15,403 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 23:44:14,504 ERROR: Exception on /purchaser_transaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 260, in purchaser_transaction
+    headers={'Content-type': 'application/json'})
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 112, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 494, in request
+    prep = self.prepare_request(req)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 437, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/models.py", line 308, in prepare
+    self.prepare_body(data, files, json)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/models.py", line 458, in prepare_body
+    body = complexjson.dumps(json)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type date is not JSON serializable
+2019-02-09 23:47:06,847 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 23:58:05,748 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-09 23:59:06,248 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 01:30:14,138 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 01:32:23,081 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 01:54:29,711 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 02:12:10,296 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 02:12:36,270 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 02:18:41,065 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 02:22:40,718 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 02:25:06,355 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 02:48:04,671 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 14:42:43,070 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 14:43:23,381 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-10 15:19:02,555 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]

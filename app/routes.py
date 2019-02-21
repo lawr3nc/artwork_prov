@@ -1,10 +1,10 @@
-from datetime import datetime
+from datetime import datetime, date
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, ArtPieceForm, AuctionForm, TransportForm, \
-    PurchaserForm, DisplayArtForm, StoreArtForm, ActivityForm
+    SaleForm, DisplayArtForm, StoreArtForm, ActivityForm
 from app.models import User
 import requests
 import json
@@ -17,26 +17,28 @@ def before_request():
         db.session.commit()
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
+    fetch_transactions()
     form = ActivityForm()
     activity = form.activity.data
-
-    if activity == 'new':
-        return redirect(url_for('artpiece'))
-    elif activity == 'submit':
-        return redirect(url_for('auction'))
-    elif activity == 'delivery':
-        return redirect(url_for('transport'))
-    elif activity == 'payment':
-        return redirect(url_for('purchaser'))
-    elif activity == 'store':
-        return redirect(url_for('storage'))
-    elif activity == 'display':
-        return redirect(url_for('display'))
-    return render_template('index.html', title='Activity', form=form)
+    if form.validate_on_submit():
+        if activity == 'new':
+            return redirect(url_for('art_transaction'))
+        elif activity == 'submit':
+            return redirect(url_for('auction_transaction'))
+        elif activity == 'delivery':
+            return redirect(url_for('transport_transaction'))
+        elif activity == 'payment':
+            return redirect(url_for('purchaser_transaction'))
+        elif activity == 'store':
+            return redirect(url_for('storage_transaction'))
+        elif activity == 'display':
+            return redirect(url_for('display_transaction'))
+    return render_template('index.html', title='Home', node_address=CONNECTED_NODE_ADDRESS, form=form,
+                           transactions=transactions)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -106,6 +108,8 @@ CONNECTED_NODE_ADDRESS = "http://127.0.0.1:5000"
 transactions = []
 
 
+@app.route('/get_transactions', methods=['GET'])
+@login_required
 def fetch_transactions():
     """
     Function to fetch the chain from a blockchain node, parse the
@@ -119,212 +123,260 @@ def fetch_transactions():
         for block in chain["chain"]:
             for tx in block["transactions"]:
                 tx["index"] = block["index"]
-                tx["hash"] = block["previous_hash"]
+                tx["hash"] = block["prev_hash"]
                 content.append(tx)
 
         global transactions
         transactions = sorted(content, key=lambda k: k['timestamp'], reverse=True)
 
 
-@app.route('/artpiece', methods=['POST'])
+def myconverter(o):
+    if isinstance(o, date):
+        return o.__str__()
+
+
+@app.route('/art_transaction', methods=['GET', 'POST'])
 @login_required
 def art_transaction():
     """
     Endpoint to create a new transaction via our application.
     """
     form = ArtPieceForm()
-    artname = form.artname.data
-    artist = form.artist.data
-    dateofcreation = form.dateofcreation.data
-    location = form.location.data
-    size = form.size.data
-    weight = form.weight.data
-    activity = form.activity.data
+    if form.validate_on_submit():
+        artid = form.artid.default
+        artname = form.artname.data
+        arttype = form.arttype.data
+        size = form.size.data
+        weight = form.weight.data
+        dateofcreation = form.dateofcreation.data
+        location = form.location.data
+        artistid = form.artistid.default
+        artist = form.artist.data
+        artistgender = form.artistgender.data
+        artistdob = form.artistdob.data
+        artistdod = form.artistdod.data
+        if arttype == "painting":
+            activity = "painting"
+        elif arttype == "sculptor":
+            activity = "sculpting"
+        else:
+            activity = "drawing"
 
-    transaction_object = {
-        'artname': artname,
-        'artist': artist,
-        'dateofcreation': dateofcreation,
-        'location': location,
-        'size': size,
-        'weight': weight,
-        'activity': activity
-    }
+        transaction_object = {
+            'artid': artid,
+            'artname': artname,
+            'arttype': arttype,
+            'artist': artist,
+            'dateofcreation': myconverter(dateofcreation),
+            'location': location,
+            'size': size,
+            'weight': weight,
+            'artistid': artistid,
+            'artistgender': artistgender,
+            'artistdob': myconverter(artistdob),
+            'artistdod': myconverter(artistdod),
+            'activity': activity
+        }
 
-    # Submit a transaction
-    new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
-
-    requests.post(new_tx_address,
-                  json=transaction_object,
-                  headers={'Content-type': 'application/json'})
-
+        # Submit a transaction
+        new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
+        requests.post(new_tx_address,
+                      json=transaction_object,
+                      headers={'Content-type': 'application/json'})
+        flash('Transaction ready for mining!')
+        return redirect(url_for('index'))
     return render_template('artpiece.html', title='Art Piece', form=form)
 
 
-@app.route('/auction', methods=['POST'])
+@app.route('/auction_transaction', methods=['GET', 'POST'])
 @login_required
 def auction_transaction():
     form = AuctionForm()
-    consignorname = form.consignorname.data
-    consignordob = form.consignordob.data
-    consignorgender = form.consignorgender.data
-    specialistname = form.specialistname.data
-    auctionhouse = form.actionhouse.data
-    specialistdob = form.specialistdob.data
-    specialistgender = form.specialistgender.data
-    activity = form.activity.data
+    if form.validate_on_submit():
+        consignorid = form.consignorid.default
+        consignorname = form.consignorname.data
+        consignordob = form.consignordob.data
+        consignorgender = form.consignorgender.data
+        artid = form.artid.default
+        artname = form.artname.data
+        location = form.location.data
+        reserve = form.reserve.data
+        activity = "submit"
 
-    transaction_object = {
-        'consignorname': consignorname,
-        'consignordob': consignordob,
-        'consignorgender': consignorgender,
-        'specialistname': specialistname,
-        'auctionhouse': auctionhouse,
-        'specialistdob': specialistdob,
-        'specialistgender': specialistgender,
-        'activity': activity
-    }
+        transaction_object = {
+            'consignorid': consignorid,
+            'consignorname': consignorname,
+            'consignordob': myconverter(consignordob),
+            'consignorgender': consignorgender,
+            'artid': artid,
+            'artname': artname,
+            'location': location,
+            'reserve': reserve,
+            'activity': activity
+        }
 
-    new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
+        new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
 
-    requests.post(new_tx_address,
-                  json=transaction_object,
-                  headers={'Content-type': 'application/json'})
-
+        requests.post(new_tx_address,
+                      json=transaction_object,
+                      headers={'Content-type': 'application/json'})
+        flash('Transaction ready for mining!')
+        return redirect(url_for('index'))
     return render_template('auction.html', title='Auction', form=form)
 
 
-@app.route('/transport', methods=['POST'])
+@app.route('/transport_transaction', methods=['GET', 'POST'])
 @login_required
 def transport_transaction():
     form = TransportForm()
-    tranportername = form.tranportername.data
-    deliveryco = form.deliveryco.data
-    transportergender = form.transportergender.data
-    transporterdob = form.transporterdob.data
-    modeoftransport = form.modeoftransport.data
-    trackingno = form.trackingno.data
-    destination = form.destination.data
-    vehicletemp = form.vehicletemp.data
-    activity = form.activity.data
+    if form.validate_on_submit():
+        transporterid = form.transporterid.default
+        tranportername = form.tranportername.data
+        deliveryco = form.deliveryco.data
+        transportergender = form.transportergender.data
+        transporterdob = form.transporterdob.data
+        modeoftransport = form.modeoftransport.data
+        trackingno = form.trackingno.default
+        destination = form.destination.data
+        vehicletemp = form.vehicletemp.data
+        artid = form.artid.default
+        artname = form.artname.data
+        activity = "deliver"
 
-    transaction_object = {
-        'transportername': tranportername,
-        'deliveryco': deliveryco,
-        'transportergender': transportergender,
-        'transporterdob': transporterdob,
-        'modeoftransport': modeoftransport,
-        'trackingno': trackingno,
-        'destination': destination,
-        'vehicletemp': vehicletemp,
-        'activity': activity
-    }
+        transaction_object = {
+            'transpoterid': transporterid,
+            'transportername': tranportername,
+            'deliveryco': deliveryco,
+            'transportergender': transportergender,
+            'transporterdob': myconverter(transporterdob),
+            'modeoftransport': modeoftransport,
+            'trackingno': trackingno,
+            'destination': destination,
+            'vehicletemp': vehicletemp,
+            'activity': activity,
+            'artid': artid,
+            'artname': artname
+        }
 
-    new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
+        new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
 
-    requests.post(new_tx_address,
-                  json=transaction_object,
-                  headers={'Content-type': 'application/json'})
-
+        requests.post(new_tx_address,
+                      json=transaction_object,
+                      headers={'Content-type': 'application/json'})
+        flash('Transaction ready for mining!')
+        return redirect(url_for('index'))
     return render_template('transport.html', title='Transport', form=form)
 
 
-@app.route('/purchaser', methods=['POST'])
+@app.route('/purchaser_transaction', methods=['GET', 'POST'])
 @login_required
 def purchaser_transaction():
-    form = PurchaserForm()
-    purchasername = form.purchasername.data
-    purchaserdob = form.purchaserdob.data
-    purchasergender = form.purchasergender.data
-    activity = form.activity.data
+    form = SaleForm()
+    if form.validate_on_submit():
+        artid = form.artid.default
+        artname = form.artname.data
+        hammerprice = form.hammerprice.data
+        buyerspremium = form.buyerspremium.data
+        auctionhouse = form.auctionhouse.data
+        specialistid = form.specialistid.default
+        specialistname = form.specialistname.data
+        specialistdob = form.specialistdob.data
+        specialistgender = form.specialistgender.data
+        purchaserid = form.purchaserid.default
+        purchasername = form.purchasername.data
+        purchaserdob = form.purchaserdob.data
+        purchasergender = form.purchasergender.data
+        activity = "purchase"
 
-    transaction_object = {
-        'purchasername':purchasername,
-        'purchaserdob': purchaserdob,
-        'purchasergender': purchasergender,
-        'activity': activity
-    }
+        transaction_object = {
+            'artid': artid,
+            'artname': artname,
+            'hammerprice': hammerprice,
+            'buyerspremium': buyerspremium,
+            'auctionhouse': auctionhouse,
+            'specialistid': specialistid,
+            'specialistname': specialistname,
+            'specialistdob': myconverter(specialistdob),
+            'specialistgender': specialistgender,
+            'purchaserid': purchaserid,
+            'purchasername': purchasername,
+            'purchaserdob': myconverter(purchaserdob),
+            'purchasergender': purchasergender,
+            'activity': activity
+        }
 
-    new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
+        new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
 
-    requests.post(new_tx_address,
-                  json=transaction_object,
-                  headers={'Content-type': 'application/json'})
-
+        requests.post(new_tx_address,
+                      json=transaction_object,
+                      headers={'Content-type': 'application/json'})
+        flash('Transaction ready for mining!')
+        return redirect(url_for('index'))
     return render_template('purchaser.html', title='Purchaser', form=form)
 
 
-@app.route('/display', methods=['POST'])
+@app.route('/display_transaction', methods=['GET', 'POST'])
 @login_required
 def display_transaction():
     form = DisplayArtForm()
-    galleryname = form.galleryname.data
-    gallerylocation = form.gallerylocation.data
-    galleryowner = form.galleryowner.data
-    displayroomtemp = form.displayroomtemp.data
-    activity = form.activity.data
+    if form.validate_on_submit():
+        artid = form.artid.default
+        artname = form.artname.data
+        galleryname = form.galleryname.data
+        gallerylocation = form.gallerylocation.data
+        galleryowner = form.galleryowner.data
+        displayroomtemp = form.displayroomtemp.data
+        activity = "display"
 
-    transaction_object = {
-        'galleryname': galleryname,
-        'gallerylocation': gallerylocation,
-        'galleryowner': galleryowner,
-        'displayroomtemp': displayroomtemp,
-        'activity': activity
-    }
+        transaction_object = {
+            'artid': artid,
+            'artname': artname,
+            'galleryname': galleryname,
+            'gallerylocation': gallerylocation,
+            'galleryowner': galleryowner,
+            'displayroomtemp': displayroomtemp,
+            'activity': activity
+        }
 
-    new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
+        new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
 
-    requests.post(new_tx_address,
-                  json=transaction_object,
-                  headers={'Content-type': 'application/json'})
-
+        requests.post(new_tx_address,
+                      json=transaction_object,
+                      headers={'Content-type': 'application/json'})
+        flash('Transaction ready for mining!')
+        return redirect(url_for('index'))
     return render_template('display.html', title='Art Display', form=form)
 
 
-@app.route('/storage', methods=['POST'])
+@app.route('/storage_transaction', methods=['GET', 'POST'])
 @login_required
 def storage_transaction():
     form = StoreArtForm()
-    storagename = form.storagename.data
-    storagelocation = form.storagelocation.data
-    storagetemp = form.storagetemp.data
-    activity = form.activity.data
+    if form.validate_on_submit():
+        artid = form.artid.default
+        artname = form.artname.data
+        storagename = form.storagename.data
+        storagelocation = form.storagelocation.data
+        storagetemp = form.storagetemp.data
+        activity = "storage"
 
-    transaction_object = {
-        'storagename': storagename,
-        'storagelocation': storagelocation,
-        'storagetemp': storagetemp,
-        'activity': activity
-    }
+        transaction_object = {
+            'artid': artid,
+            'artname': artname,
+            'storagename': storagename,
+            'storagelocation': storagelocation,
+            'storagetemp': storagetemp,
+            'activity': activity
+        }
 
-    new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
+        new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
 
-    requests.post(new_tx_address,
-                  json=transaction_object,
-                  headers={'Content-type': 'application/json'})
-
+        requests.post(new_tx_address,
+                      json=transaction_object,
+                      headers={'Content-type': 'application/json'})
+        flash('Transaction ready for mining!')
+        return redirect(url_for('index'))
     return render_template('storage.html', title='Art Storage', form=form)
-
-
-@app.route('/activity', methods=['POST'])
-@login_required
-def activity():
-    form = ActivityForm()
-    activity = form.activity.data
-
-    if activity == 'new':
-        return redirect(url_for('artpiece'))
-    elif activity == 'submit':
-        return redirect(url_for('auction'))
-    elif activity == 'delivery':
-        return redirect(url_for('transport'))
-    elif activity == 'payment':
-        return redirect(url_for('purchaser'))
-    elif activity == 'store':
-        return redirect(url_for('storage'))
-    elif activity == 'display':
-        return redirect(url_for('display'))
-    return render_template('activity.html', title='Activity', form=form)
 
 
 def timestamp_to_string(epoch_time):

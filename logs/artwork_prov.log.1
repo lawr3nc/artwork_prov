@@ -1,15 +1,4 @@
-2019-02-08 18:33:20,363 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-08 18:34:18,143 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-08 18:34:44,899 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-08 18:35:18,713 ERROR: Exception on /register [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/ext/declarative/clsregistry.py", line 281, in __call__
-    x = eval(self.arg, globals(), self._dict)
-  File "<string>", line 1, in <module>
-NameError: name 'Transaction' is not defined
-
-During handling of the above exception, another exception occurred:
-
+2019-02-20 15:59:21,308 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -23,43 +12,93 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 71, in register
-    if form.validate_on_submit():
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_wtf/form.py", line 101, in validate_on_submit
-    return self.is_submitted() and self.validate()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/wtforms/form.py", line 310, in validate
-    return super(Form, self).validate(extra)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/wtforms/form.py", line 152, in validate
-    if not field.validate(self, extra):
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/wtforms/fields/core.py", line 204, in validate
-    stop_validation = self._run_validation_chain(form, chain)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/wtforms/fields/core.py", line 224, in _run_validation_chain
-    validator(form, self)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/forms.py", line 26, in validate_username
-    user = User.query.filter_by(username=username.data).first()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_sqlalchemy/__init__.py", line 512, in __get__
-    mapper = orm.class_mapper(type)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/base.py", line 421, in class_mapper
-    mapper = _inspect_mapped_class(class_, configure=configure)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/base.py", line 400, in _inspect_mapped_class
-    mapper._configure_all()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/mapper.py", line 1222, in _configure_all
-    configure_mappers()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/mapper.py", line 2872, in configure_mappers
-    mapper._post_configure_properties()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/mapper.py", line 1765, in _post_configure_properties
-    prop.init()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/interfaces.py", line 184, in init
-    self.do_init()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/relationships.py", line 1653, in do_init
-    self._process_dependent_arguments()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/relationships.py", line 1710, in _process_dependent_arguments
-    self.target = self.mapper.mapped_table
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 764, in __get__
-    obj.__dict__[self.__name__] = result = self.fget(obj)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/relationships.py", line 1626, in mapper
-    argument = self.argument()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/ext/declarative/clsregistry.py", line 293, in __call__
-    (self.prop.parent, self.arg, n.args[0], self.cls)
-sqlalchemy.exc.InvalidRequestError: When initializing mapper Mapper|User|user, expression 'Transaction' failed to locate a name ("name 'Transaction' is not defined"). If this is a class name, consider adding this relationship() to the <class 'app.models.User'> class after both dependent classes have been defined.
-2019-02-08 18:39:02,412 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
+    Provenance.new_art()
+AttributeError: type object 'Provenance' has no attribute 'new_art'
+2019-02-20 16:00:22,159 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-20 16:00:54,582 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
+    new_art()
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 24, in new_art
+    newprov.document.entity('art:' + transaction['artid'], {
+TypeError: list indices must be integers or slices, not str
+2019-02-20 16:17:17,876 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-20 16:17:45,586 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
+    new_art()
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 24, in new_art
+    newprov.document.entity('art:' + transaction[0], {
+TypeError: can only concatenate str (not "dict") to str
+2019-02-20 16:19:41,528 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-20 16:20:06,132 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
+    new_art()
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 25, in new_art
+    'art:name': transaction[1],
+IndexError: list index out of range
+2019-02-20 18:05:55,673 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-02-20 18:06:22,308 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
+    new_art()
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 31, in new_art
+    'art:weight': labels['weight']
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/prov/model.py", line 1632, in entity
+    return self.new_record(PROV_ENTITY, identifier, None, other_attributes)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/prov/model.py", line 1608, in new_record
+    self, self.valid_qualified_name(identifier), attr_list
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/prov/model.py", line 554, in __init__
+    raise ProvElementIdentifierRequired()
+prov.model.ProvElementIdentifierRequired: An identifier is missing. All PROV elements require a valid identifier.
+2019-02-20 21:46:57,640 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]

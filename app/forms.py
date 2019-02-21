@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, \
-    TextAreaField, SelectField, DecimalField
+    TextAreaField, SelectField,IntegerField
 from wtforms.fields.html5 import DateField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, \
     Length
 from app.models import User
+import uuid
 
 
 class LoginForm(FlaskForm):
@@ -50,63 +51,85 @@ class EditProfileForm(FlaskForm):
 
 
 class ArtPieceForm(FlaskForm):
+    artid = StringField('Art ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
     artname = StringField('Art Name', validators=[DataRequired()])
-    artist = StringField('Artist Name', validators=[DataRequired()])
-    dateofcreation = DateField('Date/Year of Creation', validators=[DataRequired()])
+    arttype = SelectField("Art Type", choices=[('painting', 'Painting'), ('sculptor', 'Sculptor'), ('drawing', 'Drawing')],
+                          validators=[DataRequired()])
+    size = IntegerField('Size in cm', validators=[DataRequired()])
+    weight = IntegerField('Weight in grams', validators=[DataRequired()])
     location = StringField('Location', validators=[DataRequired()])
-    size = DecimalField('Size in cm', validators=[DataRequired()])
-    weight = DecimalField('Weight in grams', validators=[DataRequired()])
-    activity = StringField('Activity', default='New Art')
+    dateofcreation = DateField('Date/Year of Creation', validators=[DataRequired()])
+
+    artistid = StringField('Artist ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
+    artist = StringField('Artist Name', validators=[DataRequired()])
+    artistgender = SelectField('Artist Gender', choices=[('m', 'Male'), ('f', 'Female')],
+                               validators=[DataRequired()])
+    artistdob = DateField('Artist Date of Birth', validators=[DataRequired()])
+    artistdod = DateField('Artist Date of Death')
     submit = SubmitField('Submit')
 
 
 class AuctionForm(FlaskForm):
+    artid = StringField('Art ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
+    artname = StringField('Art Name', validators=[DataRequired()])
+    location = StringField('Location', validators=[DataRequired()])
+    reserve = IntegerField('Reserve', validators=[DataRequired()])
+    consignorid = StringField('Transaction ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
     consignorname = StringField('Consignor Name', validators=[DataRequired()])
     consignordob = DateField('Consignor Date of Birth', validators=[DataRequired()])
     consignorgender = SelectField('Consignor Gender', choices=[('m', 'Male'), ('f', 'Female')], validators=[DataRequired()])
-    specialistname = StringField('Specialist Name', validators=[DataRequired()])
-    actionhouse = StringField('Auction House', validators=[DataRequired()])
-    specialistdob = StringField('Specialist Date of Birth', validators=[DataRequired()])
-    specialistgender = SelectField('Consignor Gender', choices=[('m', 'Male'), ('f', 'Female')], validators=[DataRequired()])
-    activity = StringField('Activity', default='Submit Art')
     submit = SubmitField('Submit')
 
 
 class TransportForm(FlaskForm):
+    artid = StringField('Art ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
+    artname = StringField('Art Name', validators=[DataRequired()])
+    transporterid = StringField('Transporter ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
     tranportername = StringField('Driver Name', validators=[DataRequired()])
-    deliveryco = StringField('Delivery Company', validators=[DataRequired()])
     transportergender = SelectField('Transporter Gender', choices=[('m', 'Male'), ('f', 'Female')], validators=[DataRequired()])
     transporterdob = DateField('Driver Date of Birth', validators=[DataRequired()])
     modeoftransport = StringField('Mode of Transport', validators=[DataRequired()])
-    trackingno = StringField('Delivery Tracking Number', validators=[DataRequired()])
-    destination = StringField('Destination', validators=[DataRequired()])
-    vehicletemp = DecimalField('Vehicle Temperature')
-    activity = StringField('Activity', default='Deliver Art')
+    trackingno = StringField('Delivery Tracking Number', validators=[DataRequired()], default=str(uuid.uuid4())[:11])
+    destination = TextAreaField('Destination', validators=[DataRequired()])
+    vehicletemp = IntegerField('Vehicle Temperature')
+    deliveryco = StringField('Delivery Company', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
-class PurchaserForm(FlaskForm):
+class SaleForm(FlaskForm):
+    artid = StringField('Art ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
+    artname = StringField('Art Name', validators=[DataRequired()])
+    hammerprice = IntegerField('Hammer Price', validators=[DataRequired()])
+    buyerspremium = IntegerField('Premium', validators=[DataRequired()])
+    auctionhouse = StringField('Auction House', validators=[DataRequired()])
+    specialistid = StringField('Specialist ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
+    specialistname = StringField('Specialist Name', validators=[DataRequired()])
+    specialistdob = DateField('Specialist Date of Birth', validators=[DataRequired()])
+    specialistgender = SelectField('Specialist Gender', choices=[('m', 'Male'), ('f', 'Female')],
+                                   validators=[DataRequired()])
+    purchaserid = StringField('Buyer ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
     purchasername = StringField('Buyer Name', validators=[DataRequired()])
     purchaserdob = DateField('Buyer Date of Birth', validators=[DataRequired()])
-    purchasergender = SelectField('Purchaser Gender', choices=[('m', 'Male'), ('f', 'Female')], validators=[DataRequired()])
-    activity = StringField('Activity', default='Art Payment')
+    purchasergender = SelectField('Buyer Gender', choices=[('m', 'Male'), ('f', 'Female')], validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
 class DisplayArtForm(FlaskForm):
+    artid = StringField('Art ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
+    artname = StringField('Art Name', validators=[DataRequired()])
     galleryname = StringField('GalleryName', validators=[DataRequired()])
-    gallerylocation = StringField('Gallery Location', validators=[DataRequired])
+    gallerylocation = TextAreaField('Gallery Location', validators=[DataRequired])
     galleryowner = StringField('Gallery Owner', validators=[DataRequired()])
-    displayroomtemp = DecimalField('Display Room Temperature')
-    activity = StringField('Activity', default='Display Art')
+    displayroomtemp = IntegerField('Display Room Temperature')
     submit = SubmitField('Submit')
 
 
 class StoreArtForm(FlaskForm):
+    artid = StringField('Art ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
+    artname = StringField('Art Name', validators=[DataRequired()])
     storagename = StringField('Storage Unit Name', validators=[DataRequired()])
-    storagelocation = StringField('Storage Location', validators=[DataRequired()])
-    storagetemp = DecimalField('Storage Temperature', validators=[DataRequired()])
-    activity = StringField('Activity', default='Store Art')
+    storagelocation = TextAreaField('Storage Location', validators=[DataRequired()])
+    storagetemp = IntegerField('Storage Temperature')
     submit = SubmitField('Submit')
 
 
