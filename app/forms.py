@@ -86,10 +86,12 @@ class TransportForm(FlaskForm):
     artname = StringField('Art Name', validators=[DataRequired()])
     transporterid = StringField('Transporter ID', validators=[DataRequired()], default=str(uuid.uuid4())[:7])
     tranportername = StringField('Driver Name', validators=[DataRequired()])
-    transportergender = SelectField('Transporter Gender', choices=[('m', 'Male'), ('f', 'Female')], validators=[DataRequired()])
+    transportergender = SelectField('Transporter Gender', choices=[('m', 'Male'), ('f', 'Female')],
+                                    validators=[DataRequired()])
     transporterdob = DateField('Driver Date of Birth', validators=[DataRequired()])
-    modeoftransport = StringField('Mode of Transport', validators=[DataRequired()])
-    trackingno = StringField('Delivery Tracking Number', validators=[DataRequired()], default=str(uuid.uuid4())[:11])
+    modeoftransport = SelectField('Mode of Transport', choices=[('land', 'Land'), ('air', 'Air'), ('sea', 'Sea')],
+                                  validators=[DataRequired()])
+    trackingno = StringField('Delivery Tracking Number', validators=[DataRequired()])
     destination = TextAreaField('Destination', validators=[DataRequired()])
     vehicletemp = IntegerField('Vehicle Temperature')
     deliveryco = StringField('Delivery Company', validators=[DataRequired()])
@@ -138,6 +140,15 @@ class ActivityForm(FlaskForm):
                                                 ('delivery', 'Deliver Art'), ('payment', 'Art Payment'),
                                                 ('store', 'Store Art'), ('display', 'Display Art')],
                            validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
+class QueryForm(FlaskForm):
+    artname = StringField('Art Name', validators=[DataRequired()])
+    querytype = SelectField('All previous: ', choices=[('location', 'Location'), ('specialist', 'Specialist'),
+                                                       ('hammerprice', 'Hammer Price'), ('auctionhouse', 'AuctionHouse'),
+                                                       ('gallery', 'Gallery'), ('buyer', 'Buyer')],
+                            validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 

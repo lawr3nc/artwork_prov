@@ -1,4 +1,11 @@
-2019-02-09 12:30:48,168 ERROR: Exception on /art_transaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+2019-03-14 15:10:05,450 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/expatreader.py", line 217, in feed
+    self._parser.Parse(data, isFinal)
+xml.parsers.expat.ExpatError: not well-formed (invalid token): line 1, column 0
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,33 +19,30 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 160, in art_transaction
-    headers={'Content-type': 'application/json'})
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 112, in post
-    return request('post', url, data=data, json=json, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 58, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 494, in request
-    prep = self.prepare_request(req)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 437, in prepare_request
-    hooks=merge_hooks(request.hooks, self.hooks),
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/models.py", line 308, in prepare
-    self.prepare_body(data, files, json)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/models.py", line 458, in prepare_body
-    body = complexjson.dumps(json)
-  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/__init__.py", line 231, in dumps
-    return _default_encoder.encode(obj)
-  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 199, in encode
-    chunks = self.iterencode(o, _one_shot=True)
-  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 257, in iterencode
-    return _iterencode(o, 0)
-  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 179, in default
-    raise TypeError(f'Object of type {o.__class__.__name__} '
-TypeError: Object of type Decimal is not JSON serializable
-2019-02-09 12:39:34,612 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 12:39:48,862 ERROR: Exception on /art_transaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 32, in locationQuery
+    g.parse(outputfile)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1043, in parse
+    parser.parse(source, self, **args)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/parsers/rdfxml.py", line 578, in parse
+    self._parser.parse(source)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/expatreader.py", line 111, in parse
+    xmlreader.IncrementalParser.parse(self, source)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/xmlreader.py", line 125, in parse
+    self.feed(buffer)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/expatreader.py", line 221, in feed
+    self._err_handler.fatalError(exc)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/handler.py", line 38, in fatalError
+    raise exception
+xml.sax._exceptions.SAXParseException: file:///Users/kymanilawrence/Documents/artwork_prov/app/rdfqueryfiles/JofferyLand.rdf:1:0: not well-formed (invalid token)
+2019-03-14 15:12:06,243 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-14 15:12:11,513 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/expatreader.py", line 217, in feed
+    self._parser.Parse(data, isFinal)
+xml.parsers.expat.ExpatError: not well-formed (invalid token): line 1, column 0
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -52,15 +56,34 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 139, in art_transaction
-    dateofcreation = date_to_string(form.dateofcreation.data)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 333, in date_to_string
-    return datetime.fromtimestamp(epoch_time).strftime('%Y-%m-%d')
-TypeError: an integer is required (got type datetime.date)
-2019-02-09 12:50:15,168 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 12:50:30,975 ERROR: Exception on /art_transaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 32, in locationQuery
+    g.parse(outputfile)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1043, in parse
+    parser.parse(source, self, **args)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/parsers/rdfxml.py", line 578, in parse
+    self._parser.parse(source)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/expatreader.py", line 111, in parse
+    xmlreader.IncrementalParser.parse(self, source)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/xmlreader.py", line 125, in parse
+    self.feed(buffer)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/expatreader.py", line 221, in feed
+    self._err_handler.fatalError(exc)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/handler.py", line 38, in fatalError
+    raise exception
+xml.sax._exceptions.SAXParseException: file:///Users/kymanilawrence/Documents/artwork_prov/app/rdfqueryfiles/JofferyLand.rdf:1:0: not well-formed (invalid token)
+2019-03-14 15:15:55,967 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-14 15:16:04,376 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/parsers/ntriples.py", line 140, in parse
+    self.parseline()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/parsers/ntriples.py", line 189, in parseline
+    subject = self.subject()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/parsers/ntriples.py", line 218, in subject
+    raise ParseError("Subject must be uriref or nodeID")
+rdflib.plugins.parsers.ntriples.ParseError: Subject must be uriref or nodeID
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -74,11 +97,13 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 153, in art_transaction
-    'dateofcreation': myconverter(dateofcreation),
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 130, in myconverter
-    if isinstance(o, datetime.datetime):
-AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
-2019-02-09 12:51:44,352 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 32, in locationQuery
+    g.parse(outputfile, format='nt')
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1043, in parse
+    parser.parse(source, self, **args)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/parsers/nt.py", line 26, in parse
+    parser.parse(f)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/parsers/ntriples.py", line 142, in parse
+    raise ParseError("Invalid line: %r" % self.line)
+rdflib.plugins.parsers.ntriples.ParseError: Invalid line: '@prefix art: <http://art.com/> .'
+2019-03-14 15:18:57,689 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]

@@ -4,7 +4,7 @@ import json
 import requests
 from flask import request
 from app import app
-from app.provenance import new_art
+from app.provenance import choose_tx
 
 
 class Block:
@@ -21,7 +21,7 @@ class Block:
 
 
 class Blockchain:
-    difficulty = 3
+    difficulty = 5
 
     def __init__(self):
         self.pending_transactions = []
@@ -110,10 +110,11 @@ peers = set()
 
 @app.route('/newtransaction', methods=['POST'])
 def newtransaction():
+    print(getchain())
     transaction_data = request.get_json()
     transaction_data["timestamp"] = time.time()
     blockchain.addnewTransactions(transaction_data)
-    new_art()
+    choose_tx()
     print(get_pendingtransactions())
 
     return "Success", 201
@@ -125,26 +126,71 @@ def getchain():
     chaindata = []
     for block in blockchain.chain:
         chaindata.append(block.__dict__)
-    return json.dumps({"length": len(chaindata), "chain": chaindata})
+    return json.dumps({"length": len(chaindata),
+                       "chain": chaindata,
+                       "peers": list(peers)})
 
 
 @app.route('/mine', methods=['GET'])
 def mine_pending_transactions():
     result = blockchain.mine()
     if not result:
-        return "No transactions to mine"
+        return "Enter provenance to mine."
     return "Block #{} is mined.".format(result)
 
 
-@app.route('/addnodes', methods=['POST'])
+@app.route('/add_node', methods=['POST'])
 def add_newpeers():
-    nodes = request.get_json()
-    if not nodes:
+    nodeaddress = request.get_json()["nodeaddress"]
+    if not nodeaddress:
         return "Invalid data", 400
-    for node in nodes:
-        peers.add(node)
 
-    return "Success", 201
+    peers.add(nodeaddress)
+
+    return getchain()
+
+
+@app.route('/registerwith', methods=['POST'])
+def registerwith_existingnode():
+    nodeaddress = request.get_json()["nodeaddress"]
+    if not nodeaddress:
+        return "Invalid data", 400
+
+    data = {"nodeaddress": request.host_url}
+    headers = {'Content-Type': "application/json"}
+
+    # Make a request to register with remote node and obtain information
+    response = requests.post(nodeaddress + "/register_node",
+                             data=json.dumps(data), headers=headers)
+
+    if response.status_code == 200:
+        global blockchain
+        global peers
+        # update chain and the peers
+        chain_dump = response.json()['chain']
+        blockchain = createchain_fromdump(chain_dump)
+        peers.update(response.json()['peers'])
+        return "Registration successful", 200
+    else:
+        # if something goes wrong, pass it on to the API response
+        return response.content, response.status_code
+
+
+def createchain_fromdump(chain_dump):
+    blockchain = Blockchain()
+    for index, block_data in enumerate(chain_dump):
+        block = Block(block_data["index"],
+                      block_data["transactions"],
+                      block_data["timestamp"],
+                      block_data["previous_hash"])
+        proof = block_data['hash']
+        if index > 0:
+            added = blockchain.addblock(block, proof)
+            if not added:
+                raise Exception("The chain dump is tampered!!")
+        else:  # the block is a genesis block, no verification needed
+            blockchain.chain.append(block)
+    return blockchain
 
 
 @app.route('/addblock', methods=['POST'])
@@ -176,7 +222,7 @@ def consensus():
     currentlength = len(blockchain.chain)
 
     for peer in peers:
-        response = request.get('http://{}/chain'.format(peer))
+        response = request.get('{}chain'.format(peer))
         length = response.json()['length']
         chain = response.json()['chain']
         if length > currentlength and blockchain.chain_validity(chain):
@@ -192,5 +238,5 @@ def consensus():
 
 def announce_newblock(block):
     for peer in peers:
-        url = "http://{}/addblock".format(peer)
+        url = "{}addblock".format(peer)
         requests.post(url, data=json.dumps(block.__dict__, sort_keys=True))

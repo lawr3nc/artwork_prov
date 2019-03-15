@@ -38,6 +38,7 @@ Werkzeug==0.14.1
 WTForms==2.1
 prov==1.5.3
 provstore-api
+rdflib==4.2.2
 
 # requirements for Heroku
 #psycopg2==2.7.3.1

@@ -21,7 +21,7 @@ def before_request():
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    fetch_transactions()
+    transactions = fetch_transactions()
     form = ActivityForm()
     activity = form.activity.data
     if form.validate_on_submit():
@@ -105,10 +105,7 @@ def edit_profile():
 
 CONNECTED_NODE_ADDRESS = "http://127.0.0.1:5000"
 
-transactions = []
 
-
-@app.route('/get_transactions', methods=['GET'])
 @login_required
 def fetch_transactions():
     """
@@ -122,13 +119,9 @@ def fetch_transactions():
         chain = json.loads(response.content)
         for block in chain["chain"]:
             for tx in block["transactions"]:
-                tx["index"] = block["index"]
-                tx["hash"] = block["prev_hash"]
                 content.append(tx)
-
-        global transactions
-        transactions = sorted(content, key=lambda k: k['timestamp'], reverse=True)
-
+        print(content)
+        return sorted(content, key=lambda k: k['timestamp'], reverse=True)
 
 def myconverter(o):
     if isinstance(o, date):
@@ -138,9 +131,6 @@ def myconverter(o):
 @app.route('/art_transaction', methods=['GET', 'POST'])
 @login_required
 def art_transaction():
-    """
-    Endpoint to create a new transaction via our application.
-    """
     form = ArtPieceForm()
     if form.validate_on_submit():
         artid = form.artid.default
@@ -183,8 +173,8 @@ def art_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
-        flash('Transaction ready for mining!')
         return redirect(url_for('index'))
+    flash("There's an error in the form. Form was not submitted")
     return render_template('artpiece.html', title='Art Piece', form=form)
 
 
@@ -220,7 +210,6 @@ def auction_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
-        flash('Transaction ready for mining!')
         return redirect(url_for('index'))
     return render_template('auction.html', title='Auction', form=form)
 
@@ -231,7 +220,7 @@ def transport_transaction():
     form = TransportForm()
     if form.validate_on_submit():
         transporterid = form.transporterid.default
-        tranportername = form.tranportername.data
+        transportername = form.tranportername.data
         deliveryco = form.deliveryco.data
         transportergender = form.transportergender.data
         transporterdob = form.transporterdob.data
@@ -244,8 +233,8 @@ def transport_transaction():
         activity = "deliver"
 
         transaction_object = {
-            'transpoterid': transporterid,
-            'transportername': tranportername,
+            'transporterid': transporterid,
+            'transportername': transportername,
             'deliveryco': deliveryco,
             'transportergender': transportergender,
             'transporterdob': myconverter(transporterdob),
@@ -263,7 +252,6 @@ def transport_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
-        flash('Transaction ready for mining!')
         return redirect(url_for('index'))
     return render_template('transport.html', title='Transport', form=form)
 
@@ -293,6 +281,7 @@ def purchaser_transaction():
             'artname': artname,
             'hammerprice': hammerprice,
             'buyerspremium': buyerspremium,
+            'amountpaid': hammerprice + (hammerprice * (buyerspremium/100)),
             'auctionhouse': auctionhouse,
             'specialistid': specialistid,
             'specialistname': specialistname,
@@ -310,7 +299,6 @@ def purchaser_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
-        flash('Transaction ready for mining!')
         return redirect(url_for('index'))
     return render_template('purchaser.html', title='Purchaser', form=form)
 
@@ -343,7 +331,6 @@ def display_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
-        flash('Transaction ready for mining!')
         return redirect(url_for('index'))
     return render_template('display.html', title='Art Display', form=form)
 
@@ -358,7 +345,7 @@ def storage_transaction():
         storagename = form.storagename.data
         storagelocation = form.storagelocation.data
         storagetemp = form.storagetemp.data
-        activity = "storage"
+        activity = "store"
 
         transaction_object = {
             'artid': artid,
@@ -374,12 +361,10 @@ def storage_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
-        flash('Transaction ready for mining!')
         return redirect(url_for('index'))
     return render_template('storage.html', title='Art Storage', form=form)
 
 
 def timestamp_to_string(epoch_time):
     return datetime.fromtimestamp(epoch_time).strftime('%H:%M')
-
 

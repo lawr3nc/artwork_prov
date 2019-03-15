@@ -1,4 +1,4 @@
-2019-02-10 17:39:31,554 ERROR: Exception on /index [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+2019-03-14 19:53:58,300 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,90 +12,57 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 24, in index
-    fetch_transactions()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 125, in fetch_transactions
-    tx["hash"] = block["previous_hash"]
-KeyError: 'previous_hash'
-2019-02-10 17:39:32,508 ERROR: Exception on /index [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 24, in index
-    fetch_transactions()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 125, in fetch_transactions
-    tx["hash"] = block["previous_hash"]
-KeyError: 'previous_hash'
-2019-02-10 17:42:01,702 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-10 17:42:19,838 ERROR: Exception on /index [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 40, in index
-    return render_template('index.html', title='Home', node_address=CONNECTED_NODE_ADDRESS, form=form, transactions=transactions)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 135, in render_template
-    context, ctx.app)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 117, in _render
-    rv = template.render(context)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/index.html", line 2, in top-level template code
-    {% import 'bootstrap/wtf.html' as wtf %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/base.html", line 1, in top-level template code
-    {% extends 'bootstrap/base.html' %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
-    {% block doc -%}
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
-    {%- block html %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
-    {% block body -%}
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block "body"
-    {% block content -%}
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/base.html", line 48, in block "content"
-    {% block app_content %}{% endblock %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/index.html", line 13, in block "app_content"
-    {% include '_transaction.html' %}
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/templates/_transaction.html", line 3, in top-level template code
-    <td><img src="{{ transaction.author.avatar(36) }}"></td>
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 430, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'author'
-2019-02-10 17:43:43,156 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-11 09:29:05,072 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-11 19:42:39,500 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 48, in locationQuery
+    qres = g.query(querystr)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1089, in query
+    query_object, initBindings, initNs, **kwargs))
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/processor.py", line 74, in query
+    parsetree = parseQuery(strOrQuery)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/parser.py", line 1058, in parseQuery
+    return Query.parseString(q, parseAll=True)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1814, in parseString
+    raise exc
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1804, in parseString
+    loc, tokens = self._parse( instring, 0 )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
+    loc, exprtokens = e._parse( instring, loc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3886, in parseImpl
+    raise maxException
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3871, in parseImpl
+    ret = e._parse( instring, loc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
+    return self.expr._parse( instring, loc, doActions, callPreParse=False )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
+    loc, exprtokens = e._parse( instring, loc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
+    return self.expr._parse( instring, loc, doActions, callPreParse=False )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
+    return self.expr._parse( instring, loc, doActions, callPreParse=False )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
+    loc, exprtokens = e._parse( instring, loc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1552, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
+    return self.expr._parse( instring, loc, doActions, callPreParse=False )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1552, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 2625, in parseImpl
+    raise ParseException(instring, loc, self.errmsg, self)
+pyparsing.ParseException: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery} (at char 149), (line:5, col:25)
+2019-03-14 20:06:00,047 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-14 20:07:33,553 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-14 20:13:41,344 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]

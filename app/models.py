@@ -11,7 +11,6 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    #transactions = db.relationship('Transaction', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -35,12 +34,8 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-#class Transaction(db.Model):
-    #__tablename__ = 'transaction'
-    #id = db.Column(db.Integer, primary_key=True)
-    #transaction_hash = db.Column(db.String(140))
-    #timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    #def __repr__(self):
-        #return '<Transaction {}>'.format(self.transaction_hash)
+class ArtID(db.Model):
+    __tablename__ = 'artid'
+    id = db.Column(db.Integer, primary_key=True)
+    artname = db.Column(db.String(64), index=True, unique=True)
+    docid = db.Column(db.Integer)

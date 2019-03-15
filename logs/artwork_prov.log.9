@@ -1,4 +1,4 @@
-2019-02-08 23:58:29,611 ERROR: Exception on /art_transaction [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+2019-03-14 14:42:22,463 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,23 +12,53 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 159, in art_transaction
-    headers={'Content-type': 'application/json'})
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 112, in post
-    return request('post', url, data=data, json=json, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 58, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 508, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 612, in send
-    adapter = self.get_adapter(url=request.url)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 703, in get_adapter
-    raise InvalidSchema("No connection adapters were found for '%s'" % url)
-requests.exceptions.InvalidSchema: No connection adapters were found for '127.0.0.1:5000/newtransaction'
-2019-02-09 00:48:21,756 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 00:48:36,301 ERROR: Exception on /art_transaction [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 34, in locationQuery
+    """)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1089, in query
+    query_object, initBindings, initNs, **kwargs))
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/processor.py", line 75, in query
+    query = translateQuery(parsetree, base, initNs)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 764, in translateQuery
+    q[1], visitPost=functools.partial(translatePName, prologue=prologue))
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 384, in traverse
+    r = _traverse(tree, visitPre, visitPost)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 345, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 345, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 339, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 339, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 345, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 339, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 339, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 339, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 339, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 347, in _traverse
+    _e = visitPost(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/algebra.py", line 142, in translatePName
+    return prologue.absolutize(p)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/sparql.py", line 374, in absolutize
+    return self.resolvePName(iri.prefix, iri.localname)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/sparql.py", line 357, in resolvePName
+    raise Exception('Unknown namespace prefix : %s' % prefix)
+Exception: Unknown namespace prefix : art
+2019-03-14 14:42:56,872 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-14 14:46:04,290 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-14 14:46:10,332 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/shutil.py", line 563, in move
+    os.rename(src, real_dst)
+NotADirectoryError: [Errno 20] Not a directory: '/var/folders/k6/n6jf9vmd3g16fgncqpzz4_680000gn/T/tmpsiziox5n' -> '../rdfqueryfiles/rdffile.rdf'
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -42,59 +72,17 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 228, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 159, in art_transaction
-    headers={'Content-type': 'application/json'})
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 112, in post
-    return request('post', url, data=data, json=json, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/api.py", line 58, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 494, in request
-    prep = self.prepare_request(req)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/sessions.py", line 437, in prepare_request
-    hooks=merge_hooks(request.hooks, self.hooks),
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/models.py", line 305, in prepare
-    self.prepare_url(url, params)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/requests/models.py", line 379, in prepare_url
-    raise MissingSchema(error)
-requests.exceptions.MissingSchema: Invalid URL '/newtransaction': No schema supplied. Perhaps you meant http:///newtransaction?
-2019-02-09 10:47:22,181 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 10:49:48,504 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 10:52:02,584 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 10:56:08,291 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 10:57:26,810 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 11:07:57,410 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 11:08:20,824 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
-    print(get_pendingtransactions())
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 168, in get_pendingtransactions
-    return json.dumps(blockchain.pending_transactions)
-  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/__init__.py", line 231, in dumps
-    return _default_encoder.encode(obj)
-  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 199, in encode
-    chunks = self.iterencode(o, _one_shot=True)
-  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 257, in iterencode
-    return _iterencode(o, 0)
-  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 179, in default
-    raise TypeError(f'Object of type {o.__class__.__name__} '
-TypeError: Object of type datetime is not JSON serializable
-2019-02-09 11:10:13,201 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 11:10:59,523 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 11:25:25,898 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 11:31:11,667 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 12:01:57,023 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-09 12:09:29,689 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 26, in locationQuery
+    provn_doc.serialize('../rdfqueryfiles/rdffile.rdf', format='rdf')
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/prov/model.py", line 2407, in serialize
+    shutil.move(name, path)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/shutil.py", line 577, in move
+    copy_function(src, real_dst)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/shutil.py", line 263, in copy2
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/shutil.py", line 121, in copyfile
+    with open(dst, 'wb') as fdst:
+NotADirectoryError: [Errno 20] Not a directory: '../rdfqueryfiles/rdffile.rdf'
+2019-03-14 14:51:22,546 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-14 14:52:13,311 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-14 14:54:12,714 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]

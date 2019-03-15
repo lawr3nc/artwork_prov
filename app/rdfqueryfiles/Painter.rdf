@@ -1,0 +1,48 @@
+@prefix art: <http://art.com/> .
+@prefix auction: <http://auction.com/> .
+@prefix gallery: <http://gallery.com/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix transport: <http://transport.com/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://art.com/019691c> a prov:Entity ;
+    art:location "London"^^xsd:string ;
+    <http://art.com/name:> "Painter"^^xsd:string ;
+    art:reserve "3984"^^xsd:int ;
+    prov:wasAttributedTo auction:c1e6283 ;
+    prov:wasDerivedFrom <http://art.com/7fc360f> ;
+    prov:wasGeneratedBy auction:submit .
+
+art:painting a prov:Activity ;
+    prov:wasAssociatedWith <http://art.com/5b200b2> .
+
+auction:submit a prov:Activity ;
+    prov:used <http://art.com/7fc360f> ;
+    prov:wasAssociatedWith auction:c1e6283 .
+
+<http://art.com/5b200b2> a prov:Agent,
+        "prov:Person"^^xsd:string ;
+    art:artist "John Doe"^^xsd:string ;
+    art:dateofbirth "2018-01-28"^^xsd:string ;
+    art:dateofdeath "2019-03-03"^^xsd:string ;
+    art:gender "m"^^xsd:string .
+
+<http://art.com/7fc360f> a prov:Entity ;
+    art:dateofcreation "2019-03-04"^^xsd:string ;
+    art:location "London"^^xsd:string ;
+    art:name "Painter"^^xsd:string ;
+    art:size "64"^^xsd:int ;
+    art:type "painting"^^xsd:string ;
+    art:weight "96"^^xsd:int ;
+    prov:wasAttributedTo <http://art.com/5b200b2> ;
+    prov:wasGeneratedBy art:painting .
+
+auction:c1e6283 a prov:Agent,
+        "prov:Person"^^xsd:string ;
+    auction:consignordob "2019-03-07"^^xsd:string ;
+    auction:consignorgender "m"^^xsd:string ;
+    auction:consignorname "Johny"^^xsd:string .
+

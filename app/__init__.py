@@ -44,4 +44,4 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Artwork Prov startup')
 
-from app import routes, models, errors, blockchain, provenance
+from app import routes, models, errors, blockchain, provenance, queries

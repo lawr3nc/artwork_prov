@@ -1,4 +1,4 @@
-2019-02-20 15:59:21,308 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+2019-03-15 13:06:47,281 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,11 +12,43 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
-    Provenance.new_art()
-AttributeError: type object 'Provenance' has no attribute 'new_art'
-2019-02-20 16:00:22,159 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-20 16:00:54,582 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 73, in runQuery
+    qres = g.query(querystr)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1089, in query
+    query_object, initBindings, initNs, **kwargs))
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/processor.py", line 74, in query
+    parsetree = parseQuery(strOrQuery)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/parser.py", line 1058, in parseQuery
+    return Query.parseString(q, parseAll=True)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1814, in parseString
+    raise exc
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1804, in parseString
+    loc, tokens = self._parse( instring, 0 )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
+    loc, exprtokens = e._parse( instring, loc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3886, in parseImpl
+    raise maxException
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3871, in parseImpl
+    ret = e._parse( instring, loc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
+    return self.expr._parse( instring, loc, doActions, callPreParse=False )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3705, in parseImpl
+    loc, resultlist = self.exprs[0]._parse( instring, loc, doActions, callPreParse=False )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 2689, in parseImpl
+    raise ParseException(instring, loc, self.errmsg, self)
+pyparsing.ParseException: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery} (at char 0), (line:1, col:1)
+2019-03-15 13:07:44,680 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-15 13:07:54,318 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -30,75 +62,40 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
-    new_art()
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 24, in new_art
-    newprov.document.entity('art:' + transaction['artid'], {
-TypeError: list indices must be integers or slices, not str
-2019-02-20 16:17:17,876 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-20 16:17:45,586 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
-    new_art()
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 24, in new_art
-    newprov.document.entity('art:' + transaction[0], {
-TypeError: can only concatenate str (not "dict") to str
-2019-02-20 16:19:41,528 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-20 16:20:06,132 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
-    new_art()
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 25, in new_art
-    'art:name': transaction[1],
-IndexError: list index out of range
-2019-02-20 18:05:55,673 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-02-20 18:06:22,308 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 116, in newtransaction
-    new_art()
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 31, in new_art
-    'art:weight': labels['weight']
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/prov/model.py", line 1632, in entity
-    return self.new_record(PROV_ENTITY, identifier, None, other_attributes)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/prov/model.py", line 1608, in new_record
-    self, self.valid_qualified_name(identifier), attr_list
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/prov/model.py", line 554, in __init__
-    raise ProvElementIdentifierRequired()
-prov.model.ProvElementIdentifierRequired: An identifier is missing. All PROV elements require a valid identifier.
-2019-02-20 21:46:57,640 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 73, in runQuery
+    qres = g.query(querystr)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1089, in query
+    query_object, initBindings, initNs, **kwargs))
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/processor.py", line 74, in query
+    parsetree = parseQuery(strOrQuery)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/parser.py", line 1058, in parseQuery
+    return Query.parseString(q, parseAll=True)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1814, in parseString
+    raise exc
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1804, in parseString
+    loc, tokens = self._parse( instring, 0 )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
+    loc, exprtokens = e._parse( instring, loc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3886, in parseImpl
+    raise maxException
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3871, in parseImpl
+    ret = e._parse( instring, loc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
+    return self.expr._parse( instring, loc, doActions, callPreParse=False )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3705, in parseImpl
+    loc, resultlist = self.exprs[0]._parse( instring, loc, doActions, callPreParse=False )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
+    loc,tokens = self.parseImpl( instring, preloc, doActions )
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 2689, in parseImpl
+    raise ParseException(instring, loc, self.errmsg, self)
+pyparsing.ParseException: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery} (at char 0), (line:1, col:1)
+2019-03-15 13:10:35,575 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-03-15 13:28:22,433 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
