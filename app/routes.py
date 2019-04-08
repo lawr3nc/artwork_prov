@@ -8,6 +8,7 @@ from app.forms import LoginForm, RegistrationForm, EditProfileForm, ArtPieceForm
 from app.models import User
 import requests
 import json
+import uuid
 
 
 @app.before_request
@@ -133,25 +134,25 @@ def myconverter(o):
 def art_transaction():
     form = ArtPieceForm()
     if form.validate_on_submit():
-        artid = form.artid.default
+        artid = str(uuid.uuid4())[:7]
         artname = form.artname.data
         arttype = form.arttype.data
         size = form.size.data
         weight = form.weight.data
         dateofcreation = form.dateofcreation.data
         location = form.location.data
-        artistid = form.artistid.default
+        artistid = str(uuid.uuid4())[:7]
         artist = form.artist.data
         artistgender = form.artistgender.data
         artistdob = form.artistdob.data
         artistdod = form.artistdod.data
+        coa = form.coa.data
         if arttype == "painting":
             activity = "painting"
         elif arttype == "sculptor":
             activity = "sculpting"
         else:
             activity = "drawing"
-
         transaction_object = {
             'artid': artid,
             'artname': artname,
@@ -165,17 +166,20 @@ def art_transaction():
             'artistgender': artistgender,
             'artistdob': myconverter(artistdob),
             'artistdod': myconverter(artistdod),
-            'activity': activity
+            'activity': activity,
+            'certofauthenticity': coa
         }
-
-        # Submit a transaction
+        if coa is False:
+            return redirect(url_for('art_transaction'))
         new_tx_address = "{}/newtransaction".format(CONNECTED_NODE_ADDRESS)
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
+        mine_block_address = "{}/mine".format(CONNECTED_NODE_ADDRESS)
+        requests.get(mine_block_address)
         return redirect(url_for('index'))
-    flash("There's an error in the form. Form was not submitted")
-    return render_template('artpiece.html', title='Art Piece', form=form)
+    flash("Form not submitted")
+    return render_template('forms/artpiece.html', title='Art Piece', form=form)
 
 
 @app.route('/auction_transaction', methods=['GET', 'POST'])
@@ -183,11 +187,11 @@ def art_transaction():
 def auction_transaction():
     form = AuctionForm()
     if form.validate_on_submit():
-        consignorid = form.consignorid.default
+        consignorid = str(uuid.uuid4())[:7]
         consignorname = form.consignorname.data
         consignordob = form.consignordob.data
         consignorgender = form.consignorgender.data
-        artid = form.artid.default
+        artid = str(uuid.uuid4())[:7]
         artname = form.artname.data
         location = form.location.data
         reserve = form.reserve.data
@@ -210,8 +214,10 @@ def auction_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
+        mine_block_address = "{}/mine".format(CONNECTED_NODE_ADDRESS)
+        requests.get(mine_block_address)
         return redirect(url_for('index'))
-    return render_template('auction.html', title='Auction', form=form)
+    return render_template('forms/auction.html', title='Auction', form=form)
 
 
 @app.route('/transport_transaction', methods=['GET', 'POST'])
@@ -219,7 +225,7 @@ def auction_transaction():
 def transport_transaction():
     form = TransportForm()
     if form.validate_on_submit():
-        transporterid = form.transporterid.default
+        transporterid = str(uuid.uuid4())[:7]
         transportername = form.tranportername.data
         deliveryco = form.deliveryco.data
         transportergender = form.transportergender.data
@@ -228,7 +234,7 @@ def transport_transaction():
         trackingno = form.trackingno.default
         destination = form.destination.data
         vehicletemp = form.vehicletemp.data
-        artid = form.artid.default
+        artid = str(uuid.uuid4())[:7]
         artname = form.artname.data
         activity = "deliver"
 
@@ -252,8 +258,10 @@ def transport_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
+        mine_block_address = "{}/mine".format(CONNECTED_NODE_ADDRESS)
+        requests.get(mine_block_address)
         return redirect(url_for('index'))
-    return render_template('transport.html', title='Transport', form=form)
+    return render_template('forms/transport.html', title='Transport', form=form)
 
 
 @app.route('/purchaser_transaction', methods=['GET', 'POST'])
@@ -261,16 +269,17 @@ def transport_transaction():
 def purchaser_transaction():
     form = SaleForm()
     if form.validate_on_submit():
-        artid = form.artid.default
+        artid = str(uuid.uuid4())[:7]
         artname = form.artname.data
         hammerprice = form.hammerprice.data
         buyerspremium = form.buyerspremium.data
+        saledate = form.saledate.data
         auctionhouse = form.auctionhouse.data
-        specialistid = form.specialistid.default
+        specialistid = str(uuid.uuid4())[:7]
         specialistname = form.specialistname.data
         specialistdob = form.specialistdob.data
         specialistgender = form.specialistgender.data
-        purchaserid = form.purchaserid.default
+        purchaserid = str(uuid.uuid4())[:7]
         purchasername = form.purchasername.data
         purchaserdob = form.purchaserdob.data
         purchasergender = form.purchasergender.data
@@ -281,7 +290,8 @@ def purchaser_transaction():
             'artname': artname,
             'hammerprice': hammerprice,
             'buyerspremium': buyerspremium,
-            'amountpaid': hammerprice + (hammerprice * (buyerspremium/100)),
+            'amountpaid': round(hammerprice + (hammerprice * (buyerspremium/100))),
+            'saledate': myconverter(saledate),
             'auctionhouse': auctionhouse,
             'specialistid': specialistid,
             'specialistname': specialistname,
@@ -299,8 +309,10 @@ def purchaser_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
+        mine_block_address = "{}/mine".format(CONNECTED_NODE_ADDRESS)
+        requests.get(mine_block_address)
         return redirect(url_for('index'))
-    return render_template('purchaser.html', title='Purchaser', form=form)
+    return render_template('forms/purchaser.html', title='Purchaser', form=form)
 
 
 @app.route('/display_transaction', methods=['GET', 'POST'])
@@ -308,7 +320,7 @@ def purchaser_transaction():
 def display_transaction():
     form = DisplayArtForm()
     if form.validate_on_submit():
-        artid = form.artid.default
+        artid = str(uuid.uuid4())[:7]
         artname = form.artname.data
         galleryname = form.galleryname.data
         gallerylocation = form.gallerylocation.data
@@ -331,8 +343,10 @@ def display_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
+        mine_block_address = "{}/mine".format(CONNECTED_NODE_ADDRESS)
+        requests.get(mine_block_address)
         return redirect(url_for('index'))
-    return render_template('display.html', title='Art Display', form=form)
+    return render_template('forms/display.html', title='Art Display', form=form)
 
 
 @app.route('/storage_transaction', methods=['GET', 'POST'])
@@ -340,7 +354,7 @@ def display_transaction():
 def storage_transaction():
     form = StoreArtForm()
     if form.validate_on_submit():
-        artid = form.artid.default
+        artid = str(uuid.uuid4())[:7]
         artname = form.artname.data
         storagename = form.storagename.data
         storagelocation = form.storagelocation.data
@@ -361,10 +375,9 @@ def storage_transaction():
         requests.post(new_tx_address,
                       json=transaction_object,
                       headers={'Content-type': 'application/json'})
+        mine_block_address = "{}/mine".format(CONNECTED_NODE_ADDRESS)
+        requests.get(mine_block_address)
         return redirect(url_for('index'))
-    return render_template('storage.html', title='Art Storage', form=form)
+    return render_template('forms/storage.html', title='Art Storage', form=form)
 
-
-def timestamp_to_string(epoch_time):
-    return datetime.fromtimestamp(epoch_time).strftime('%H:%M')
 

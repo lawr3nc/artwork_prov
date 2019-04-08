@@ -39,6 +39,7 @@ WTForms==2.1
 prov==1.5.3
 provstore-api
 rdflib==4.2.2
+pytest
 
 # requirements for Heroku
 #psycopg2==2.7.3.1

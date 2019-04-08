@@ -2,11 +2,16 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>What do you want to know about this artwork?</h1>
+    <h1>Query the provenance of an artwork of your choice</h1>
     {% if form %}
         <form action="{{ url_for('runQuery') }}" method="post">
             {{ wtf.quick_form(form) }}
         </form>
     <br>
     {% endif %}
+
+    <br><br>
+    {% for result in results %}
+        {{ result.y }} <br>
+    {% endfor %}
 {% endblock %}

@@ -2,7 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>Art Transportation</h1>
+    <h1>Art Payment</h1>
     {% if form %}
         <form action="{{ url_for('purchaser_transaction') }}" method="post">
             {{ wtf.quick_form(form) }}

@@ -1,8 +1,8 @@
 from datetime import datetime
+from app import login, db
 from hashlib import md5
-from app import db, login
 from flask_login import UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 class User(UserMixin, db.Model):
@@ -39,3 +39,6 @@ class ArtID(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     artname = db.Column(db.String(64), index=True, unique=True)
     docid = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Art {}>'.format(self.artname)

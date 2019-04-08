@@ -1,4 +1,5 @@
 from hashlib import sha256
+from datetime import datetime
 import time
 import json
 import requests
@@ -37,18 +38,6 @@ class Blockchain:
     def lastblock(self):
         return self.chain[-1]
 
-    def addblock(self, block, proof):
-        prev_hash = self.lastblock.hash
-        if prev_hash != block.prev_hash:
-            return False
-
-        if not Blockchain.is_proof_valid(block, proof):
-            return False
-
-        block.hash = proof
-        self.chain.append(block)
-        return True
-
     def addnewTransactions(self, transaction):
         self.pending_transactions.append(transaction)
 
@@ -85,6 +74,18 @@ class Blockchain:
         return (blockhash.startswith('0' * Blockchain.difficulty) and
                 blockhash == block.generate_hash())
 
+    def addblock(self, block, proof):
+        prev_hash = self.lastblock.hash
+        if prev_hash != block.prev_hash:
+            return False
+
+        if not Blockchain.is_proof_valid(block, proof):
+            return False
+
+        block.hash = proof
+        self.chain.append(block)
+        return True
+
     @classmethod
     def chain_validity(cls, chain):
         result = True
@@ -110,12 +111,10 @@ peers = set()
 
 @app.route('/newtransaction', methods=['POST'])
 def newtransaction():
-    print(getchain())
     transaction_data = request.get_json()
-    transaction_data["timestamp"] = time.time()
+    transaction_data["timestamp"] = timestamp_to_string(time.time())
     blockchain.addnewTransactions(transaction_data)
     choose_tx()
-    print(get_pendingtransactions())
 
     return "Success", 201
 
@@ -135,8 +134,8 @@ def getchain():
 def mine_pending_transactions():
     result = blockchain.mine()
     if not result:
-        return "Enter provenance to mine."
-    return "Block #{} is mined.".format(result)
+        return "Enter provenance to mine.", 400
+    return "Block #{} is mined.".format(result), 201
 
 
 @app.route('/add_node', methods=['POST'])
@@ -193,23 +192,6 @@ def createchain_fromdump(chain_dump):
     return blockchain
 
 
-@app.route('/addblock', methods=['POST'])
-def validate_and_addblock():
-    blockdata = request.get_json()
-    block = Block(blockdata["index"],
-                  blockdata["transactions"],
-                  blockdata["timest"],
-                  blockdata["prev_hash"])
-
-    proof = blockdata['hash']
-    added = blockchain.addblock(block, proof)
-
-    if not added:
-        return "The block was discarded by the node", 400
-
-    return "Block added to the chain", 201
-
-
 @app.route('/pendingtransactions')
 def get_pendingtransactions():
     return json.dumps(blockchain.pending_transactions)
@@ -240,3 +222,7 @@ def announce_newblock(block):
     for peer in peers:
         url = "{}addblock".format(peer)
         requests.post(url, data=json.dumps(block.__dict__, sort_keys=True))
+
+
+def timestamp_to_string(epoch_time):
+    return datetime.fromtimestamp(epoch_time).strftime('%H:%M')

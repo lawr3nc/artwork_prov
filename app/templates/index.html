@@ -5,8 +5,6 @@
     <h1>Hi, {{ current_user.username }}!</h1>
     {% if form %}
     {{ wtf.quick_form(form) }}
-    <br>
-    <a href="{{node_address}}/mine" target="_blank"><button>Request to mine</button></a>
     {% endif %}
     <br><br>
     {% for transaction in transactions %}

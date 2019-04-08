@@ -1,4 +1,80 @@
-2019-03-14 19:52:28,043 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+2019-04-08 17:45:55,486 ERROR: Exception on / [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1182, in _execute_context
+    context)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: user.passwordhash
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1811, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2087, in preprocess_request
+    rv = func()
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/routes.py", line 16, in before_request
+    if current_user.is_authenticated:
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/werkzeug/local.py", line 347, in __getattr__
+    return getattr(self._get_current_object(), name)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/werkzeug/local.py", line 306, in _get_current_object
+    return self.__local()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 26, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/utils.py", line 302, in _get_user
+    current_app.login_manager._load_user()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/login_manager.py", line 317, in _load_user
+    return self.reload_user()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask_login/login_manager.py", line 279, in reload_user
+    user = self.user_callback(user_id)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/models.py", line 34, in load_user
+    return User.query.get(int(id))
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 864, in get
+    return self._get_impl(ident, loading.load_on_ident)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 897, in _get_impl
+    return fallback_fn(self, key)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/loading.py", line 223, in load_on_ident
+    return q.one()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2814, in one
+    ret = self.one_or_none()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2784, in one_or_none
+    ret = list(self)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2855, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2878, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 945, in execute
+    return meth(self, multiparams, params)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 263, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1053, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1189, in _execute_context
+    context)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1402, in _handle_dbapi_exception
+    exc_info
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 186, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1182, in _execute_context
+    context)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.passwordhash [SQL: 'SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.passwordhash AS user_passwordhash, user.about_me AS user_about_me, user.last_seen AS user_last_seen \nFROM user \nWHERE user.id = ?'] [parameters: (1,)]
+2019-04-08 17:49:01,391 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+2019-04-08 18:14:16,896 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:46]
+2019-04-08 18:15:02,347 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:31]
+2019-04-08 18:16:46,697 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:31]
+2019-04-08 18:20:26,656 ERROR: Exception on /newtransaction [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,55 +88,10 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 47, in locationQuery
-    qres = g.query(querystr)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1089, in query
-    query_object, initBindings, initNs, **kwargs))
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/processor.py", line 74, in query
-    parsetree = parseQuery(strOrQuery)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/parser.py", line 1058, in parseQuery
-    return Query.parseString(q, parseAll=True)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1814, in parseString
-    raise exc
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1804, in parseString
-    loc, tokens = self._parse( instring, 0 )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
-    loc, exprtokens = e._parse( instring, loc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3886, in parseImpl
-    raise maxException
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3871, in parseImpl
-    ret = e._parse( instring, loc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
-    return self.expr._parse( instring, loc, doActions, callPreParse=False )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
-    loc, exprtokens = e._parse( instring, loc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
-    return self.expr._parse( instring, loc, doActions, callPreParse=False )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
-    return self.expr._parse( instring, loc, doActions, callPreParse=False )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
-    loc, exprtokens = e._parse( instring, loc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1552, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
-    return self.expr._parse( instring, loc, doActions, callPreParse=False )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1552, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 2625, in parseImpl
-    raise ParseException(instring, loc, self.errmsg, self)
-pyparsing.ParseException: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery} (at char 149), (line:5, col:25)
-2019-03-14 19:53:48,375 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/blockchain.py", line 117, in newtransaction
+    choose_tx()
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 291, in choose_tx
+    return display()
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/provenance.py", line 215, in display
+    retrieved_document = api.document.get(docdb.docid)
+UnboundLocalError: local variable 'docdb' referenced before assignment

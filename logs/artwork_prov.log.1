@@ -1,101 +1,84 @@
-2019-03-15 13:06:47,281 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+2019-04-08 21:25:31,808 ERROR: Exception on /favicon.ico [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1791, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1774, in raise_routing_exception
+    raise request.routing_exception
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/ctx.py", line 336, in match_request
+    self.url_adapter.match(return_rule=True)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/werkzeug/routing.py", line 1581, in match
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1713, in handle_user_exception
+    return self.handle_http_exception(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1644, in handle_http_exception
+    return handler(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/errors.py", line 7, in page_not_found
+    return render_template('404.html'), 404
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 58, in get_source
+    return self._get_source_fast(environment, template)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 86, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: 404.html
+2019-04-08 21:25:40,206 ERROR: Exception on /favicon.ico [GET] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 73, in runQuery
-    qres = g.query(querystr)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1089, in query
-    query_object, initBindings, initNs, **kwargs))
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/processor.py", line 74, in query
-    parsetree = parseQuery(strOrQuery)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/parser.py", line 1058, in parseQuery
-    return Query.parseString(q, parseAll=True)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1814, in parseString
-    raise exc
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1804, in parseString
-    loc, tokens = self._parse( instring, 0 )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
-    loc, exprtokens = e._parse( instring, loc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3886, in parseImpl
-    raise maxException
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3871, in parseImpl
-    ret = e._parse( instring, loc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
-    return self.expr._parse( instring, loc, doActions, callPreParse=False )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3705, in parseImpl
-    loc, resultlist = self.exprs[0]._parse( instring, loc, doActions, callPreParse=False )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 2689, in parseImpl
-    raise ParseException(instring, loc, self.errmsg, self)
-pyparsing.ParseException: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery} (at char 0), (line:1, col:1)
-2019-03-15 13:07:44,680 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-03-15 13:07:54,318 ERROR: Exception on /location [POST] [in /Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py:1761]
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1791, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1774, in raise_routing_exception
+    raise request.routing_exception
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/ctx.py", line 336, in match_request
+    self.url_adapter.match(return_rule=True)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/werkzeug/routing.py", line 1581, in match
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
   File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/kymanilawrence/Documents/artwork_prov/app/queries.py", line 73, in runQuery
-    qres = g.query(querystr)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/graph.py", line 1089, in query
-    query_object, initBindings, initNs, **kwargs))
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/processor.py", line 74, in query
-    parsetree = parseQuery(strOrQuery)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/rdflib/plugins/sparql/parser.py", line 1058, in parseQuery
-    return Query.parseString(q, parseAll=True)
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1814, in parseString
-    raise exc
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1804, in parseString
-    loc, tokens = self._parse( instring, 0 )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3722, in parseImpl
-    loc, exprtokens = e._parse( instring, loc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3886, in parseImpl
-    raise maxException
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3871, in parseImpl
-    ret = e._parse( instring, loc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 4067, in parseImpl
-    return self.expr._parse( instring, loc, doActions, callPreParse=False )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 3705, in parseImpl
-    loc, resultlist = self.exprs[0]._parse( instring, loc, doActions, callPreParse=False )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 1548, in _parseNoCache
-    loc,tokens = self.parseImpl( instring, preloc, doActions )
-  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/pyparsing.py", line 2689, in parseImpl
-    raise ParseException(instring, loc, self.errmsg, self)
-pyparsing.ParseException: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery} (at char 0), (line:1, col:1)
-2019-03-15 13:10:35,575 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
-2019-03-15 13:28:22,433 INFO: Artwork Prov startup [in /Users/kymanilawrence/Documents/artwork_prov/app/__init__.py:45]
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1713, in handle_user_exception
+    return self.handle_http_exception(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/app.py", line 1644, in handle_http_exception
+    return handler(e)
+  File "/Users/kymanilawrence/Documents/artwork_prov/app/errors.py", line 7, in page_not_found
+    return render_template('404.html'), 404
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 58, in get_source
+    return self._get_source_fast(environment, template)
+  File "/Users/kymanilawrence/Documents/artwork_prov/venv/lib/python3.7/site-packages/flask/templating.py", line 86, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: 404.html

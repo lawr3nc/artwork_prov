@@ -169,7 +169,9 @@ def purchase():
             'auction:hammerprice': labels['hammerprice']
         })
         retdoc.activity('auction:auctionpreparation')
-        retdoc.activity('auction:'+labels['activity'])
+        retdoc.activity('auction:'+labels['activity'], None, None, {
+            'auction:saledate': labels['saledate']
+        })
         retdoc.agent('auction:'+labels['specialistid'], {
             'auction:specialistname': labels['specialistname'],
             'auction:specialistdob': labels['specialistdob'],
@@ -218,7 +220,7 @@ def display():
         prevart = retdoc.entity('art:'+labels['artid'], {'art:name': labels['artname']})
 
         retdoc.activity('gallery:'+labels['activity'], None,  None,
-                        {'gallery:displayareatemp': labels['displayareatemp']})
+                        {'gallery:displayroomtemp': labels['displayroomtemp']})
         retdoc.agent('gallery:'+galleryid, {
             'gallery:name': labels['galleryname'],
             'gallery:location': labels['gallerylocation'],
@@ -248,7 +250,7 @@ def storage():
                 if tx['artname'] == labels['artname']:
                     docdb = ArtID.query.filter_by(artname=labels['artname']).first()
                     break
-        retrieved_document = api.document.get(docdb.id)
+        retrieved_document = api.document.get(docdb.docid)
         retdoc = retrieved_document.prov
 
         storageid = str(uuid.uuid4())[:7]
